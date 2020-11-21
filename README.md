@@ -8,6 +8,8 @@ fReadout = GetMetadata<TRestReadout>();
 
 A complex readout might require some calculation time to produce a mapping. Therefore, a pre-produced readout in a ROOT file is recommended to be re-used later on at a processing chain.
 
+#### Manually generating a readout file
+
 To generate a readout and write it to file you may use the following:
 
 ```
@@ -17,6 +19,8 @@ restRoot
 [2] r->Write("pixelReadout");
 [3] f->Close();
 ```
+
+#### Recovering the readout saved in a file
 
 Now we will be able to recover the readout in a later session, and access the `TRestReadout` methods and metadata information. The following code loads the saved readout and prints all the relevant information. 
 
@@ -33,10 +37,22 @@ The `PrintMetadata` method for `TRestReadout` might receive as argument an integ
 r->PrintMetadata(3);
 ```
 
+#### Accessing the readout methods to retrieve information
+
+
+#### Translating positions into readout coordinates and viceversa
+
+
+#### A macro to generate a file with several readouts.
+
+
+#### Validating the readout with random localized depositions.
+
+
+
 -----
 
 
-TODO. Include here a basic decoding file and show basic things demonstrating its use.
 
 **⚠ WARNING: REST is under continous development.** This README is offered to you by the REST community. Your HELP is needed to keep this file up to date. Feel free to contribute fixing typos, updating information or adding new contributions. See also our [Contribution Guide](https://lfna.unizar.es/rest-development/REST_v2/-/blob/master/CONTRIBUTING.md).
 
