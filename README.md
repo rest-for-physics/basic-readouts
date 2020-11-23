@@ -55,6 +55,12 @@ If we assume we got an instance of our readout at `*r` we can access all those e
 
 Notice that if we do not add the usual `;` at the end of the line the value returned by the method will be printed on screen.
 
+It is also possible to access methods that provide geometrical calculations, such as the distance from a hit to the corresponding readout plane which is usefull to know the total drift distance.
+
+```
+[9] r->GetReadoutPlane(1)->GetDistanceTo(12,15,10)
+```
+
 #### Translating positions into readout coordinates and viceversa
 
 The most important methods inside the `TRestReadout` class are those that allow us to translate a particular coordinate in our detector volume `(x,y)` into a readout plane, module, and channel, and viceversa. And identify the physical position (x,y) corresponding to a given electronic daq channel id.
@@ -68,15 +74,15 @@ Int_t GetHitsDaqChannel(TVector3 hitpos, Int_t& planeID, Int_t& moduleID, Int_t&
 The `&` at the arguments inside the method definitions means that it is being passed by reference, and the variable given will be updated inside the method. Using our instance of the readout we can test those methods as follows:
 
 ```
-[9] Int_t plane = -1;
-[10] Int_t module = -1;
-[11] Int_t channel = -1;
+[10] Int_t plane = -1;
+[11] Int_t module = -1;
+[12] Int_t channel = -1;
 
-[12] Int_t daqId = r->GetHitsDaqChannel(TVector3(5, 7, 12.5), plane, module, channel);
+[13] Int_t daqId = r->GetHitsDaqChannel(TVector3(5, 7, 12.5), plane, module, channel);
 
-[13] cout << "The corresponding daqId is : " << daqId << " plane: " << plane << " module: " << module << " and channel: " << channel << endl;
-[14] r->GetX(plane, module, channel)
-[15] r->GetY(plane, module, channel)
+[14] cout << "The corresponding daqId is : " << daqId << " plane: " << plane << " module: " << module << " and channel: " << channel << endl;
+[15] r->GetX(plane, module, channel)
+[16] r->GetY(plane, module, channel)
 ```
 
 After running those commands we should recover back the original position used to get the `daqId` with the drawback that the granularity of the readout will return just the center of the readout channel, and not the original raw position.
@@ -105,8 +111,8 @@ An additional macro, `ReadoutTest.C` is given at this repository to execute a re
 
 ```
 restRoot --m 1
-.L ReadoutTest.C
-ReadoutTest("out.root", "stripped");
+[0] .L ReadoutTest.C
+[1] ReadoutTest("out.root", "stripped");
 ```
 
 or
