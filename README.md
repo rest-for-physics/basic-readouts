@@ -11,6 +11,14 @@ For a detailed description of the readout please refer to the [TRestReadout clas
 
 A complex readout might require some calculation time to produce a mapping. Therefore, a pre-produced readout in a ROOT file is recommended to be re-used later on at a processing chain.
 
+#### List of readouts available in this project
+
+* **pixelReadout**: It is found inside the file `pixelReadout.rml` and it defines a pixelated grid with a given number of `N_CHANNELS`. The size of the pixels is given by `PITCH` in mm which is the default units for distance inside REST.
+
+* **pixelDecoding**: It is also found inside `pixelReadout.rml`. It defines a fixed 5x5 pixel grid with 5mm per pixel. It uses a decoding file, `dummy.dec`, to establish a relation between physical channels and electronics channel ids. It defines two readout planes that share the same decodign pattern with an offset. The decoding file must contain the same number of channels as we find in our readout.
+
+* **stripReadout**: It is found inside the file `strippedReadout.rml` defines two readout planes where we define stripped channels oriented in different axis depending of the readout plane.
+
 #### Manually generating a readout file
 
 To generate a readout and write it to file you may use the interactive ROOT shell loading the REST libraries through the command `restRoot` as follows:
@@ -36,9 +44,22 @@ restRoot
 ```
 
 The `PrintMetadata` method for `TRestReadout` might receive as argument an integer number to increase the level of detail in the information. For example:
+
 ```
 [4] r->PrintMetadata(3);
 ```
+
+#### Visualizing the readout
+
+Inside REST there is a macro, named `REST_ViewReadout`, to help visualizing the readout topology. Just load `restRoot` enabling official REST macros support using `--m 1` argument as in the following recipe:
+
+```
+restRoot --m 1
+[0] REST_ViewReadout( "readouts.root", "pixelReadout");
+[1] REST_ViewReadout( "readouts.root", "pixelDecoding", 1 );
+```
+
+where the latest argument is an optional integer value specifying the readout plane to be visualized.
 
 #### Accessing the readout methods to retrieve information
 
@@ -121,11 +142,6 @@ or
 restRoot --m 1 ReadoutTest.C'("out.root", "stripped")'
 ```
 
-
 -----
 
-
-
 **⚠ WARNING: REST is under continous development.** This README is offered to you by the REST community. Your HELP is needed to keep this file up to date. You are very welcome to contribute fixing typos, updating information or adding new contributions. See also our [Contribution Guide](https://lfna.unizar.es/rest-development/REST_v2/-/blob/master/CONTRIBUTING.md).
-
-
