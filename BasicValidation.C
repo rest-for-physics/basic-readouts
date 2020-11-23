@@ -2,7 +2,7 @@ Int_t BasicValidation() {
     TFile* f = new TFile("readout.root");
     TRestReadout* r = (TRestReadout*)f->Get("pixelWithDecoding");
 
-    Int_t planes = r->GetNumberOfReadoutModules();
+    Int_t planes = r->GetNumberOfReadoutPlanes();
 
     if (planes != 2) {
         cout << "Basic readout validation. Number of planes is not 2!" << endl;
