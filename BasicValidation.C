@@ -1,6 +1,6 @@
-Int_t BasicValidation() {
-    TFile* f = new TFile("readout.root");
-    TRestReadout* r = (TRestReadout*)f->Get("pixelWithDecoding");
+Int_t BasicValidation(TString rfile, TString rname) {
+    TFile* f = new TFile(rfile);
+    TRestReadout* r = (TRestReadout*)f->Get(rname);
 
     Int_t planes = r->GetNumberOfReadoutPlanes();
 
