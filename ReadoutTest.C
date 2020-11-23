@@ -1,4 +1,4 @@
-Int_t ReadoutValidation(TString readoutFile, TString readoutName) {
+Int_t ReadoutTest(TString readoutFile, TString readoutName) {
     // We define the 128 bits mask to enable different channels
     Int_t mask[4];
     mask[0] = 0x80000110;  // Channels 4, 8 and 31 enabled
