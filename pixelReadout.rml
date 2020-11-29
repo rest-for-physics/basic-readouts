@@ -7,7 +7,7 @@
     </globals>
 
 
-    <TRestReadout name="pixelReadout" title="A basic pixel readout ${PITCH}mm-Pitch ${N_CHANNELS}x${N_CHANNELS} channels" verboseLevel="warning">
+    <TRestDetectorReadout name="pixelReadout" title="A basic pixel readout ${PITCH}mm-Pitch ${N_CHANNELS}x${N_CHANNELS} channels" verboseLevel="warning">
 
         <constant name="pitch" value="${PITCH}" overwrite="false" />
         <constant name="nChannels" value="${N_CHANNELS}" overwrite="false" />
@@ -34,9 +34,9 @@
             <addReadoutModule id="0" name="pixelModule" origin="(-0.5*nChannels*pitch,-0.5*nChannels*pitch)" rotation="0" decodingFile="" firstDaqChannel="0" />
         </readoutPlane>
 
-    </TRestReadout>
+    </TRestDetectorReadout>
 
-    <TRestReadout name="pixelDecoding" title="A basic pixel readout with 25-channels decoding." verboseLevel="warning">
+    <TRestDetectorReadout name="pixelDecoding" title="A basic pixel readout with 25-channels decoding." verboseLevel="warning">
 
         <constant name="nChannels" value="5" />
         <constant name="pixelSize" value="5" />
@@ -61,5 +61,5 @@
             <addReadoutModule id="0" name="pixelModule" origin="(-0.5*nChannels*pixelSize,-0.5*nChannels*pixelSize)" rotation="0" decodingFile="dummy.dec" firstDaqChannel="nChannels*nChannels" />
         </readoutPlane>
 
-    </TRestReadout>
+    </TRestDetectorReadout>
 </readouts>
