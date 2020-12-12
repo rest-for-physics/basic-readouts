@@ -6,7 +6,7 @@
         <variable name="N_CHANNELS" value="32" overwrite="false" />
     </globals>
 
-    <TRestReadout name="stripReadout" title="A basic strip readout ${PITCH}mm-Pitch ${N_CHANNELS}+${N_CHANNELS} channels" verboseLevel="info">
+    <TRestDetectorReadout name="stripReadout" title="A basic strip readout ${PITCH}mm-Pitch ${N_CHANNELS}+${N_CHANNELS} channels" verboseLevel="info">
 
         <constant name="pitch" value="${PITCH}" overwrite="false" />
         <constant name="nChannels" value="${N_CHANNELS}" overwrite="false" />
@@ -46,5 +46,5 @@
             <addReadoutModule id="0" name="yStripsModule" origin="(-0.5*nChannels*pitch,-0.5*nChannels*pitch)" rotation="0" decodingFile="" firstDaqChannel="0" />
         </readoutPlane>
 
-    </TRestReadout>
+    </TRestDetectorReadout>
 </readouts>

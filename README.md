@@ -1,12 +1,12 @@
-This project hosts few basic TRestReadout definitions that should serve as reference to new REST users. A readout can be included inside a processing chain, and it serves to find the relation between the electronic channels of the detector and the physical readout channels, as well as to define the topology of the readout. Typical processes that use the readout are `TRestHitsToSignalProcess` and `TRestSignalToHitsProcess` for event reconstruction.
+This project hosts few basic TRestDetectorReadout definitions that should serve as reference to new REST users. A readout can be included inside a processing chain, and it serves to find the relation between the electronic channels of the detector and the physical readout channels, as well as to define the topology of the readout. Typical processes that use the readout are `TRestHitsToSignalProcess` and `TRestSignalToHitsProcess` for event reconstruction.
 
-Any REST process that includes a TRestReadout definition will be able to retrieve the readout by using:
+Any REST process that includes a TRestDetectorReadout definition will be able to retrieve the readout by using:
 
 ```
-fReadout = GetMetadata<TRestReadout>();
+fReadout = GetMetadata<TRestDetectorReadout>();
 ```
 
-For a detailed description of the readout please refer to the [TRestReadout class documentation](https://sultan.unizar.es/rest/classTRestReadout.html).
+For a detailed description of the readout please refer to the [TRestDetectorReadout class documentation](https://sultan.unizar.es/rest/classTRestDetectorReadout.html).
 
 
 A complex readout might require some calculation time to produce a mapping. Therefore, a pre-produced readout in a ROOT file is recommended to be re-used later on at a processing chain.
@@ -26,24 +26,24 @@ To generate a readout and write it to file you may use the interactive ROOT shel
 ```
 restRoot
 [0] TFile *f = new TFile("readouts.root");
-[1] TRestReadout *r = new TRestReadout("pixelReadout.rml");
+[1] TRestDetectorReadout *r = new TRestDetectorReadout("pixelReadout.rml");
 [2] r->Write("pixelReadout");
 [3] f->Close();
 ```
 
 #### Recovering the readout saved in a file
 
-Now we will be able to recover the readout in a later session, and access the `TRestReadout` methods and metadata information. The following code loads the saved readout and prints all the relevant information. 
+Now we will be able to recover the readout in a later session, and access the `TRestDetectorReadout` methods and metadata information. The following code loads the saved readout and prints all the relevant information. 
 
 ```
 restRoot
 [0] TFile *f = new TFile("readouts.root");
 [1] .ls
-[2] TRestReadout *r = (TRestReadout) f->Get("pixelReadout");
+[2] TRestDetectorReadout *r = (TRestDetectorReadout) f->Get("pixelReadout");
 [3] r->PrintMetadata();
 ```
 
-The `PrintMetadata` method for `TRestReadout` might receive as argument an integer number to increase the level of detail in the information. For example:
+The `PrintMetadata` method for `TRestDetectorReadout` might receive as argument an integer number to increase the level of detail in the information. For example:
 
 ```
 [4] r->PrintMetadata(3);
@@ -63,7 +63,7 @@ where the latest argument is an optional integer value specifying the readout pl
 
 #### Accessing the readout methods to retrieve information
 
-Once we generate a readout or recover it from a file, we will be able to access all the readout information from the instanced pointer. A readout is built with nested structures that allow to define inner elements. A readout is made of any number of readout planes (TRestReadoutPlane), that at the same time hosts any number of readout modules (TRestReadoutModule). A readout module is composed of readout channels (TRestReadoutChannel) that are directly identified with a corresponding electronic channel. In order to allow the description of arbitrary readout topologies, a readout channel is built with any number of squared (or triangular) pixels (TRestReadoutPixel) that are interconnected between them. 
+Once we generate a readout or recover it from a file, we will be able to access all the readout information from the instanced pointer. A readout is built with nested structures that allow to define inner elements. A readout is made of any number of readout planes (TRestDetectorReadoutPlane), that at the same time hosts any number of readout modules (TRestDetectorReadoutModule). A readout module is composed of readout channels (TRestDetectorReadoutChannel) that are directly identified with a corresponding electronic channel. In order to allow the description of arbitrary readout topologies, a readout channel is built with any number of squared (or triangular) pixels (TRestDetectorReadoutPixel) that are interconnected between them. 
 
 If we assume we got an instance of our readout at `*r` we can access all those entities as follows:
 
@@ -84,7 +84,7 @@ It is also possible to access methods that provide geometrical calculations, suc
 
 #### Translating positions into readout coordinates and viceversa
 
-The most important methods inside the `TRestReadout` class are those that allow us to translate a particular coordinate in our detector volume `(x,y)` into a readout plane, module, and channel, and viceversa. And identify the physical position (x,y) corresponding to a given electronic daq channel id.
+The most important methods inside the `TRestDetectorReadout` class are those that allow us to translate a particular coordinate in our detector volume `(x,y)` into a readout plane, module, and channel, and viceversa. And identify the physical position (x,y) corresponding to a given electronic daq channel id.
 
 ```
 Double_t GetX(Int_t planeID, Int_t modID, Int_t chID);
