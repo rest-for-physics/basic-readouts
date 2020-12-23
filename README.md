@@ -1,4 +1,4 @@
-This project hosts few basic TRestDetectorReadout definitions that should serve as reference to new REST users. A readout can be included inside a processing chain, and it serves to find the relation between the electronic channels of the detector and the physical readout channels, as well as to define the topology of the readout. Typical processes that use the readout are `TRestHitsToSignalProcess` and `TRestSignalToHitsProcess` for event reconstruction.
+This project hosts few basic TRestDetectorReadout definitions that should serve as reference to new REST users. A readout can be included inside a processing chain, and it serves to find the relation between the electronic channels of the detector and the physical readout channels, as well as to define the topology of the readout. Typical processes that use the readout are `TRestDetectorHitsToSignalProcess` and `TRestDetectorSignalToHitsProcess` for event reconstruction.
 
 Any REST process that includes a TRestDetectorReadout definition will be able to retrieve the readout by using:
 
