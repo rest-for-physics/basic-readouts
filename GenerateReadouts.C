@@ -15,6 +15,9 @@ Int_t GenerateReadouts(TString outFileName) {
     TRestDetectorReadout* r3 = new TRestDetectorReadout("strippedReadout.rml");
     r3->Write("stripped");
 
+    TRestDetectorReadout* r4 = new TRestDetectorReadout("microbulk.rml");
+    r4->Write("microbulk");
+
     f->Close();
 
     return 0;
