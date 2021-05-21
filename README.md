@@ -143,7 +143,7 @@ restRoot --m 1 ReadoutTest.C'("out.root", "stripped")'
 ```
 
 The following images show the validation of readouts given at this repository using the validations macros.
-<img src="images/pixel.png" width="280" ><img src="images/stripped.png" width="280" ><img src="images/microbulk.png" width="280" >
+<img src="images/pixel.png" width="220" ><img src="images/stripped.png" width="220" ><img src="images/microbulk.png" width="220" >
 
 
 -----
