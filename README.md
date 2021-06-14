@@ -54,9 +54,9 @@ The `PrintMetadata` method for `TRestDetectorReadout` might receive as argument 
 Inside REST there is a macro, named `REST_ViewReadout`, to help visualizing the readout topology. Just load `restRoot` enabling official REST macros support using `--m 1` argument as in the following recipe:
 
 ```
-restRoot --m 1
-[0] REST_ViewReadout( "readouts.root", "pixelReadout");
-[1] REST_ViewReadout( "readouts.root", "pixelDecoding", 1 );
+restRootMacros
+[0] REST_Detector_ViewReadout( "readouts.root", "pixelReadout");
+[1] REST_Detector_ViewReadout( "readouts.root", "pixelDecoding", 1 );
 ```
 
 where the latest argument is an optional integer value specifying the readout plane to be visualized.
