@@ -25,7 +25,7 @@ To generate a readout and write it to file you may use the interactive ROOT shel
 
 ```
 restRoot
-[0] TFile *f = new TFile("readouts.root");
+[0] TFile *f = new TFile("readouts.root", "RECREATE");
 [1] TRestDetectorReadout *r = new TRestDetectorReadout("pixelReadout.rml");
 [2] r->Write("pixelReadout");
 [3] f->Close();
