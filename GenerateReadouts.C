@@ -1,3 +1,9 @@
+#include <TString.h>
+#include <iostream>
+using namespace std;
+
+#include <TFile.h>
+#include <TRestDetectorReadout.h>
 
 Int_t GenerateReadouts(TString outFileName) {
     cout << "Starting macro" << endl;
