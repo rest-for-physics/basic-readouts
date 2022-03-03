@@ -25,7 +25,7 @@ To generate a readout and write it to file you may use the interactive ROOT shel
 
 ```
 restRoot
-[0] TFile *f = new TFile("readouts.root");
+[0] TFile *f = new TFile("readouts.root", "RECREATE");
 [1] TRestDetectorReadout *r = new TRestDetectorReadout("pixelReadout.rml");
 [2] r->Write("pixelReadout");
 [3] f->Close();
@@ -54,9 +54,9 @@ The `PrintMetadata` method for `TRestDetectorReadout` might receive as argument 
 Inside REST there is a macro, named `REST_ViewReadout`, to help visualizing the readout topology. Just load `restRoot` enabling official REST macros support using `--m 1` argument as in the following recipe:
 
 ```
-restRoot --m 1
-[0] REST_ViewReadout( "readouts.root", "pixelReadout");
-[1] REST_ViewReadout( "readouts.root", "pixelDecoding", 1 );
+restRootMacros
+[0] REST_Detector_ViewReadout( "readouts.root", "pixelReadout");
+[1] REST_Detector_ViewReadout( "readouts.root", "pixelDecoding", 1 );
 ```
 
 where the latest argument is an optional integer value specifying the readout plane to be visualized.
@@ -141,6 +141,11 @@ or
 ```
 restRoot --m 1 ReadoutTest.C'("out.root", "stripped")'
 ```
+
+The following images show the validation of readouts given at this repository using the validations macros.
+
+<img src="images/pixel.png" width="220" ><img src="images/stripped.png" width="220" ><img src="images/microbulk.png" width="220" >
+
 
 -----
 
