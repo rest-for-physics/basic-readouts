@@ -22,6 +22,6 @@ Int_t ReadoutTest(TString readoutFile, TString readoutName) {
 
     // This script will launch the generation of random (x,y) positions at the specified region,
     // and it will draw only the hits on the activated channels (8, 31, 32-47).
-    REST_Detector_CheckReadout(readoutFile, readoutName, region, mask, N, pId);
+    REST_Detector_CheckReadout(readoutFile, readoutName, region, mask, 0, N, pId);
     return 0;
 }
