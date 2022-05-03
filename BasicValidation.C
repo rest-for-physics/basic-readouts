@@ -2,17 +2,17 @@
 #include <TRestDetectorReadout.h>
 
 Int_t BasicValidation(const char* readoutFilename, const char* readoutName) {
-    TFile* f = new TFile(readoutFilename);
-    TRestDetectorReadout* r = (TRestDetectorReadout*)f->Get(readoutName);
+    TFile file(readoutFilename);
+    TRestDetectorReadout* readout = file.Get<TRestDetectorReadout>(readoutName);
 
-    Int_t planes = r->GetNumberOfReadoutPlanes();
+    Int_t planes = readout->GetNumberOfReadoutPlanes();
 
     if (planes != 2) {
         cout << "Basic readout validation. Number of planes is not 2!" << endl;
         return 1;
     }
 
-    Int_t daqId = r->GetReadoutPlane(1)->GetModule(0)->GetChannel(6)->GetDaqID();
+    Int_t daqId = readout->GetReadoutPlane(1)->GetModule(0)->GetChannel(6)->GetDaqID();
 
     if (daqId != 30) {
         cout << "Basic readout validation. Daq id does not correspond!" << endl;
