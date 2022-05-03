@@ -25,10 +25,10 @@ To generate a readout and write it to file you may use the interactive ROOT shel
 
 ```
 restRoot
-[0] TFile *f = new TFile("readouts.root", "RECREATE");
-[1] TRestDetectorReadout *r = new TRestDetectorReadout("pixelReadout.rml");
-[2] r->Write("pixelReadout");
-[3] f->Close();
+[0] TFile file("readouts.root", "RECREATE");
+[1] TRestDetectorReadout readout("pixelReadout.rml");
+[2] readout.Write("pixelReadout");
+[3] file.Close();
 ```
 
 #### Recovering the readout saved in a file
@@ -37,16 +37,16 @@ Now we will be able to recover the readout in a later session, and access the `T
 
 ```
 restRoot
-[0] TFile *f = new TFile("readouts.root");
+[0] TFile file("readouts.root");
 [1] .ls
-[2] TRestDetectorReadout *r = (TRestDetectorReadout) f->Get("pixelReadout");
-[3] r->PrintMetadata();
+[2] TRestDetectorReadout* readout = file.Get<TRestDetectorReadout>("pixelReadout");
+[3] readout->PrintMetadata();
 ```
 
 The `PrintMetadata` method for `TRestDetectorReadout` might receive as argument an integer number to increase the level of detail in the information. For example:
 
 ```
-[4] r->PrintMetadata(3);
+[4] readout->PrintMetadata(3);
 ```
 
 #### Visualizing the readout
@@ -55,8 +55,8 @@ Inside REST there is a macro, named `REST_ViewReadout`, to help visualizing the 
 
 ```
 restRootMacros
-[0] REST_Detector_ViewReadout( "readouts.root", "pixelReadout");
-[1] REST_Detector_ViewReadout( "readouts.root", "pixelDecoding", 1 );
+[0] REST_Detector_ViewReadout("readouts.root", "pixelReadout");
+[1] REST_Detector_ViewReadout("readouts.root", "pixelDecoding", 1);
 ```
 
 where the latest argument is an optional integer value specifying the readout plane to be visualized.
@@ -65,13 +65,13 @@ where the latest argument is an optional integer value specifying the readout pl
 
 Once we generate a readout or recover it from a file, we will be able to access all the readout information from the instanced pointer. A readout is built with nested structures that allow to define inner elements. A readout is made of any number of readout planes (TRestDetectorReadoutPlane), that at the same time hosts any number of readout modules (TRestDetectorReadoutModule). A readout module is composed of readout channels (TRestDetectorReadoutChannel) that are directly identified with a corresponding electronic channel. In order to allow the description of arbitrary readout topologies, a readout channel is built with any number of squared (or triangular) pixels (TRestDetectorReadoutPixel) that are interconnected between them. 
 
-If we assume we got an instance of our readout at `*r` we can access all those entities as follows:
+If we assume we got an instance of our readout at `*readout` we can access all those entities as follows:
 
 ```
-[5] r->GetNumberOfReadoutPlanes()
-[6] r->GetReadoutPlane(0)->GetNumberOfModules()
-[7] r->GetReadoutPlane(0)->GetModule(0)->GetNumberOfChannels()
-[8] r->GetReadoutPlane(0)->GetModule(0)->GetChannel(0)->Print();
+[5] readout->GetNumberOfReadoutPlanes()
+[6] readout->GetReadoutPlane(0)->GetNumberOfModules()
+[7] readout->GetReadoutPlane(0)->GetModule(0)->GetNumberOfChannels()
+[8] readout->GetReadoutPlane(0)->GetModule(0)->GetChannel(0)->Print();
 ```
 
 Notice that if we do not add the usual `;` at the end of the line the value returned by the method will be printed on screen.
@@ -79,7 +79,7 @@ Notice that if we do not add the usual `;` at the end of the line the value retu
 It is also possible to access methods that provide geometrical calculations, such as the distance from a hit to the corresponding readout plane which is usefull to know the total drift distance.
 
 ```
-[9] r->GetReadoutPlane(1)->GetDistanceTo(12,15,10)
+[9] readout->GetReadoutPlane(1)->GetDistanceTo(12,15,10)
 ```
 
 #### Translating positions into readout coordinates and viceversa
@@ -99,11 +99,11 @@ The `&` at the arguments inside the method definitions means that it is being pa
 [11] Int_t module = -1;
 [12] Int_t channel = -1;
 
-[13] Int_t daqId = r->GetHitsDaqChannel(TVector3(5, 7, 12.5), plane, module, channel);
+[13] Int_t daqId = readout->GetHitsDaqChannel(TVector3(5, 7, 12.5), plane, module, channel);
 
 [14] cout << "The corresponding daqId is : " << daqId << " plane: " << plane << " module: " << module << " and channel: " << channel << endl;
-[15] r->GetX(plane, module, channel)
-[16] r->GetY(plane, module, channel)
+[15] readout->GetX(plane, module, channel)
+[16] readout->GetY(plane, module, channel)
 ```
 
 After running those commands we should recover back the original position used to get the `daqId` with the drawback that the granularity of the readout will return just the center of the readout channel, and not the original raw position.
