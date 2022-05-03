@@ -15,21 +15,21 @@ Int_t GenerateReadouts(const char* outFilename) {
 
     // If TRestDetectorReadout name is not given, the first definition will be taken
     cout << "Creating first TRestDetectorReadout" << endl;
-    auto pixelReadout = new TRestDetectorReadout("pixelReadout.rml");
-    pixelReadout->Write("pixel");
+    TRestDetectorReadout pixelReadout("pixelReadout.rml");
+    pixelReadout.Write("pixel");
 
     // We need to provide the name because it is not the first definition
     cout << "Creating second TRestDetectorReadout" << endl;
-    auto pixelReadoutDecoding = new TRestDetectorReadout("pixelReadout.rml", "pixelDecoding");
-    pixelReadoutDecoding->Write("pixelDecoding");
+    TRestDetectorReadout pixelReadoutDecoding("pixelReadout.rml", "pixelDecoding");
+    pixelReadoutDecoding.Write("pixelDecoding");
 
     cout << "Creating third TRestDetectorReadout" << endl;
-    auto strippedReadout = new TRestDetectorReadout("strippedReadout.rml");
-    strippedReadout->Write("stripped");
+    TRestDetectorReadout strippedReadout("strippedReadout.rml");
+    strippedReadout.Write("stripped");
 
     cout << "Creating fourth TRestDetectorReadout" << endl;
-    auto readoutMicrobulk = new TRestDetectorReadout("microbulk.rml");
-    readoutMicrobulk->Write("microbulk");
+    TRestDetectorReadout readoutMicrobulk("microbulk.rml");
+    readoutMicrobulk.Write("microbulk");
 
     cout << "Closing TFile: " << file.GetName() << endl;
     file.Close();
