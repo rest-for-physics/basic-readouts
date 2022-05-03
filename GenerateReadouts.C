@@ -7,11 +7,11 @@
 
 using namespace std;
 
-Int_t GenerateReadouts(TString outFileName) {
+Int_t GenerateReadouts(const char* outFilename) {
     cout << "Starting macro" << endl;
 
     cout << "Creating TFile" << endl;
-    TFile* f = new TFile(outFileName, "RECREATE");
+    TFile file(outFilename, "RECREATE");
 
     // If TRestDetectorReadout name is not given, the first definition will be taken
     cout << "Creating first TRestDetectorReadout" << endl;
@@ -32,7 +32,7 @@ Int_t GenerateReadouts(TString outFileName) {
     r4->Write("microbulk");
 
     cout << "Closing TFile" << endl;
-    f->Close();
+    file.Close();
 
     return 0;
 }
