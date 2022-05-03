@@ -1,9 +1,9 @@
 
 #include <TRestDetectorReadout.h>
 
-Int_t BasicValidation(TString rfile, TString rname) {
-    TFile* f = new TFile(rfile);
-    TRestDetectorReadout* r = (TRestDetectorReadout*)f->Get(rname);
+Int_t BasicValidation(const char* readoutFilename, const char* readoutName) {
+    TFile* f = new TFile(readoutFilename);
+    TRestDetectorReadout* r = (TRestDetectorReadout*)f->Get(readoutName);
 
     Int_t planes = r->GetNumberOfReadoutPlanes();
 
