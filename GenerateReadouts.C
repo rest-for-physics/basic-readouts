@@ -10,28 +10,28 @@ using namespace std;
 Int_t GenerateReadouts(const char* outFilename) {
     cout << "Starting macro" << endl;
 
-    cout << "Creating TFile" << endl;
+    cout << "Creating TFile: " << outFilename << endl;
     TFile file(outFilename, "RECREATE");
 
     // If TRestDetectorReadout name is not given, the first definition will be taken
     cout << "Creating first TRestDetectorReadout" << endl;
-    TRestDetectorReadout* r1 = new TRestDetectorReadout("pixelReadout.rml");
-    r1->Write("pixel");
+    auto pixelReadout = new TRestDetectorReadout("pixelReadout.rml");
+    pixelReadout->Write("pixel");
 
     // We need to provide the name because it is not the first definition
     cout << "Creating second TRestDetectorReadout" << endl;
-    TRestDetectorReadout* r2 = new TRestDetectorReadout("pixelReadout.rml", "pixelDecoding");
-    r2->Write("pixelDecoding");
+    auto pixelReadoutDecoding = new TRestDetectorReadout("pixelReadout.rml", "pixelDecoding");
+    pixelReadoutDecoding->Write("pixelDecoding");
 
     cout << "Creating third TRestDetectorReadout" << endl;
-    TRestDetectorReadout* r3 = new TRestDetectorReadout("strippedReadout.rml");
-    r3->Write("stripped");
+    auto strippedReadout = new TRestDetectorReadout("strippedReadout.rml");
+    strippedReadout->Write("stripped");
 
     cout << "Creating fourth TRestDetectorReadout" << endl;
-    TRestDetectorReadout* r4 = new TRestDetectorReadout("microbulk.rml");
-    r4->Write("microbulk");
+    auto readoutMicrobulk = new TRestDetectorReadout("microbulk.rml");
+    readoutMicrobulk->Write("microbulk");
 
-    cout << "Closing TFile" << endl;
+    cout << "Closing TFile: " << file.GetName() << endl;
     file.Close();
 
     return 0;
