@@ -1,7 +1,6 @@
 
 #include <TFile.h>
 #include <TRestDetectorReadout.h>
-#include <TString.h>
 
 #include <iostream>
 

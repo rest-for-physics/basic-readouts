@@ -1,5 +1,10 @@
 
+#include <TFile.h>
 #include <TRestDetectorReadout.h>
+
+#include <iostream>
+
+using namespace std;
 
 Int_t BasicValidation(const char* readoutFilename, const char* readoutName) {
     TFile file(readoutFilename);
