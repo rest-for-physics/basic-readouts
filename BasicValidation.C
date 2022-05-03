@@ -1,3 +1,6 @@
+
+#include <TRestDetectorReadout.h>
+
 Int_t BasicValidation(TString rfile, TString rname) {
     TFile* f = new TFile(rfile);
     TRestDetectorReadout* r = (TRestDetectorReadout*)f->Get(rname);
