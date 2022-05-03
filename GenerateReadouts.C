@@ -1,9 +1,11 @@
-#include <TString.h>
-#include <iostream>
-using namespace std;
 
 #include <TFile.h>
 #include <TRestDetectorReadout.h>
+#include <TString.h>
+
+#include <iostream>
+
+using namespace std;
 
 Int_t GenerateReadouts(TString outFileName) {
     cout << "Starting macro" << endl;
@@ -24,6 +26,10 @@ Int_t GenerateReadouts(TString outFileName) {
     cout << "Creating third TRestDetectorReadout" << endl;
     TRestDetectorReadout* r3 = new TRestDetectorReadout("strippedReadout.rml");
     r3->Write("stripped");
+
+    cout << "Creating fourth TRestDetectorReadout" << endl;
+    TRestDetectorReadout* r4 = new TRestDetectorReadout("microbulk.rml");
+    r4->Write("microbulk");
 
     cout << "Closing TFile" << endl;
     f->Close();
