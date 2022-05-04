@@ -7,10 +7,10 @@
 using namespace std;
 
 Int_t GenerateReadouts(const char* outFilename) {
-    cout << "Starting macro" << endl;
+    cout << "Starting 'GenerateReadouts' macro" << endl;
 
-    cout << "Creating TFile: " << outFilename << endl;
     TFile file(outFilename, "RECREATE");
+    cout << "Readouts will be saved to TFile: " << file.GetName() << endl;
 
     // If TRestDetectorReadout name is not given, the first definition will be taken
     cout << "Creating first TRestDetectorReadout" << endl;
