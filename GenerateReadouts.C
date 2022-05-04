@@ -1,25 +1,37 @@
 
-Int_t GenerateReadouts(TString outFileName) {
-    TFile* f = new TFile(outFileName, "RECREATE");
+#include <TFile.h>
+#include <TRestDetectorReadout.h>
 
-    // If TRestDetectorReadout name is not given, the first
-    // definition will be taken
-    TRestDetectorReadout* r1 = new TRestDetectorReadout("pixelReadout.rml");
-    r1->Write("pixel");
+#include <iostream>
 
-    // We need to provide the name because it is not the
-    // first definition
-    TRestDetectorReadout* r2 = new TRestDetectorReadout("pixelReadout.rml", "pixelDecoding");
-    r2->Write("pixelDecoding");
+using namespace std;
 
-    TRestDetectorReadout* r3 = new TRestDetectorReadout("strippedReadout.rml");
-    r3->Write("stripped");
+Int_t GenerateReadouts(const char* outFilename) {
+    cout << "Starting 'GenerateReadouts' macro" << endl;
 
-    TRestDetectorReadout* r4 = new TRestDetectorReadout("microbulk.rml");
-    r4->Write("microbulk");
+    TFile file(outFilename, "RECREATE");
+    cout << "Readouts will be saved to TFile: " << file.GetName() << endl;
 
-    f->Close();
+    // If TRestDetectorReadout name is not given, the first definition will be taken
+    cout << "Creating first TRestDetectorReadout" << endl;
+    TRestDetectorReadout pixelReadout("pixelReadout.rml");
+    pixelReadout.Write("pixel");
+
+    // We need to provide the name because it is not the first definition
+    cout << "Creating second TRestDetectorReadout" << endl;
+    TRestDetectorReadout pixelReadoutDecoding("pixelReadout.rml", "pixelDecoding");
+    pixelReadoutDecoding.Write("pixelDecoding");
+
+    cout << "Creating third TRestDetectorReadout" << endl;
+    TRestDetectorReadout strippedReadout("strippedReadout.rml");
+    strippedReadout.Write("stripped");
+
+    cout << "Creating fourth TRestDetectorReadout" << endl;
+    TRestDetectorReadout readoutMicrobulk("microbulk.rml");
+    readoutMicrobulk.Write("microbulk");
+
+    cout << "Closing TFile: " << file.GetName() << endl;
+    file.Close();
 
     return 0;
 }
-
