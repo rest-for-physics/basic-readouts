@@ -30,7 +30,7 @@
             </for>
         </readoutModule>
 
-        <readoutPlane position="(0,0,0)mm" planeVector="(0,0,1)" chargeCollection="1" cathodePosition="(0,0,100)mm">
+        <readoutPlane position="(0,0,0)mm" normal="(0,0,1)" chargeCollection="1" height="100mm">
             <addReadoutModule id="0" name="pixelModule" origin="(-0.5*nChannels*pitch,-0.5*nChannels*pitch)" rotation="0" decodingFile="" firstDaqChannel="0" />
         </readoutPlane>
 
@@ -53,11 +53,11 @@
             </for>
         </readoutModule>
 
-        <readoutPlane position="(0,0,0)mm" planeVector="(0,0,1)" chargeCollection="1" cathodePosition="(0,0,100)mm">
+        <readoutPlane position="(0,0,0)mm" normal="(0,0,1)" chargeCollection="1" height="100mm">
             <addReadoutModule id="0" name="pixelModule" origin="(-0.5*nChannels*pixelSize,-0.5*nChannels*pixelSize)" rotation="0" decodingFile="dummy.dec" firstDaqChannel="0" />
         </readoutPlane>
 
-        <readoutPlane position="(0,0,0)mm" planeVector="(0,0,1)" chargeCollection="1" cathodePosition="(0,0,100)mm">
+        <readoutPlane position="(0,0,0)mm" normal="(0,0,1)" chargeCollection="1" height="100mm">
             <addReadoutModule id="0" name="pixelModule" origin="(-0.5*nChannels*pixelSize,-0.5*nChannels*pixelSize)" rotation="0" decodingFile="dummy.dec" firstDaqChannel="nChannels*nChannels" />
         </readoutPlane>
 
