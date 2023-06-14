@@ -82,10 +82,10 @@
 
 		</readoutModule>
 
-        <readoutPlane position="(0,0,-160.4)mm" planeVector="(0,0,1)" chargeCollection="1" cathodePosition="(0,0,0)mm">
+        <readoutPlane position="(0,0,-160.4)mm" normal="(0,0,1)" chargeCollection="1" height="160.4mm">
             <addReadoutModule id="0" name="module" origin="(-0.5*nChannels*pitch,-0.5*nChannels*pitch)" rotation="0" decodingFile="" firstDaqChannel="0" />
         </readoutPlane>
-        <readoutPlane position="(0,0,160.4)mm" planeVector="(0,0,-1)" chargeCollection="1" cathodePosition="(0,0,0)mm">
+        <readoutPlane position="(0,0,160.4)mm" normal="(0,0,-1)" chargeCollection="1" height="160.4mm">
             <addReadoutModule id="0" name="module" origin="(-0.5*nChannels*pitch,-0.5*nChannels*pitch)" rotation="0" decodingFile="" firstDaqChannel="72*8" />
         </readoutPlane>
     </TRestDetectorReadout>
